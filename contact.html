@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ติดต่อเรา - จรรยาบรรณวิชาชีพครู</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div class="overlay"></div>
+    <header>
+    <div class="container">
+        
+            <section class="top-bar">
+                <div class="logo">
+                    <img src="images/logo.png" alt="โลโก้" class="logo-image">
+                </div>
+                <nav>
+                    <ul class="nav-list">
+                        <li><a href="index.html">หน้าแรก</a></li>
+                        <li class="dropdown">
+                            <a href="#">หัวข้อทั้งหมด</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="topic1.html">1. ความหมายของคุณธรรม</a></li>
+                                <li><a href="topic2.html">2. วินัยและการรักษาวินัย</a></li>
+                                <li><a href="topic3.html">3. โทษผิดวินัยมี 5 สถาน</a></li>
+                                <li><a href="topic4.html">4. คุณธรรม จริยธรรมของครู</a></li>
+                                <li><a href="topic5.html">5. จรรยาบรรณวิชาชีพครู</a></li>
+                                <li><a href="topic6.html">6. แนวทางการพัฒนาคุณธรรม</a></li>
+                                <li><a href="topic7.html">7. การพัฒนาคุณธรรม</a></li>
+                                <li><a href="test01.html">ข้อสอบเรื่องคุณธรรมจริยธรรมของครู</a></li>
+                                <li><a href="test02.html">ข้อสอบเรื่องจรรยาบรรณของครู</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="members.html">สมาชิก</a></li>
+                        <li><a href="contact.html">ติดต่อ</a></li>
+                    </ul>
+                    <!-- Hamburger Button -->
+                    <div class="hamburger">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                </nav>
+            </section>
+        </div>
+    </header>
+
+        <main class="contact-content">
+
+
+            <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <a href="index.html">หน้าแรก</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle">หัวข้อทั้งหมด</a>
+                <ul class="dropdown-menu">
+                    <li><a href="topic1.html">1. ความหมายของคุณธรรม</a></li>
+                    <li><a href="topic2.html">2. วินัยและการรักษาวินัย</a></li>
+                    <li><a href="topic3.html">3. โทษผิดวินัยมี 5 สถาน</a></li>
+                    <li><a href="topic4.html">4. คุณธรรม จริยธรรมของครู</a></li>
+                    <li><a href="topic5.html">5. จรรยาบรรณวิชาชีพครู</a></li>
+                </ul>
+            </div>
+            <a href="members.html">สมาชิก</a>
+            <a href="contact.html">ติดต่อ</a>
+        </div>
+            
+            <div class="contact-header">
+                <h1 class="fadeIn-text">ติดต่อเรา</h1>
+                <p class="fadeIn-text">หากมีข้อสงสัยหรือต้องการติดต่อ สามารถติดต่อได้ตามช่องทางด้านล่าง</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <i class="icon location"></i>
+                        <h3>ที่อยู่</h3>
+                        <p>มหาวิทยาลัยราชภัฏนครราชสีมา</p>
+                        <p>340 ถ.สุรนารายณ์ ต.ในเมือง อ.เมือง จ.นครราชสีมา 30000</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="icon phone"></i>
+                        <h3>โทรศัพท์</h3>
+                        <p>0808488372</p>
+                        <p>เวลาทำการ: จันทร์ - ศุกร์ 08:30 - 16:30 น.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="icon email"></i>
+                        <h3>อีเมล</h3>
+                        <p>6540108122@nrru.ac.th</p>
+                    </div>
+                </div>
+
+                <!-- วางในส่วน body แทนที่ฟอร์มเดิม -->
+                <form id="contactForm" action="" method="POST">
+                    <div class="form-group">
+                        <label for="name">ชื่อ-นามสกุล</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">อีเมล</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">เรื่อง</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">ข้อความ</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">ส่งข้อความ</button>
+                </form>
+
+            </div>
+
+            <!-- ป๊อปอัพ -->
+            <div class="popup" id="popup">
+                <div class="popup-content">
+                    <h3>ข้อความของคุณถูกส่งแล้ว</h3>
+                    <p>ขอบคุณที่ติดต่อเรา เราจะตอบกลับคุณเร็วๆ นี้</p>
+                    <button class="close-btn" onclick="closePopup()">ปิด</button>
+                </div>
+            </div>
+
+            <div class="map-section">
+                <h2>แผนที่การเดินทาง</h2>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3854.145273985664!2d102.1137011!3d14.984638799999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31194c8103b59e17%3A0xf0469d0a80730a0!2z4Lih4Lir4Liy4Lin4Li04LiX4Lii4Liy4Lil4Lix4Lii4Lij4Liy4LiK4Lig4Lix4LiP4LiZ4LiE4Lij4Lij4Liy4LiK4Liq4Li14Lih4Liy!5e0!3m2!1sth!2sth!4v1734810781294!5m2!1sth!2sth"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </main>
+    
+
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h3>✓ ส่งข้อความสำเร็จ</h3>
+            <p>ขอบคุณที่ติดต่อเรา เราจะตอบกลับคุณเร็วๆ นี้</p>
+            <button class="close-btn" onclick="closePopup()">ปิด</button>
+        </div>
+    </div>
+
+    <script>
+        function showPopup() {
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('contactForm').reset();
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            showPopup();
+        });
+
+        document.getElementById('popup').addEventListener('click', function (event) {
+            if (event.target === this) {
+                closePopup();
+            }
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && document.getElementById('popup').style.display === 'flex') {
+                closePopup();
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

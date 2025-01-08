@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบทดประจำบทเรียนของครู</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+    
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+    
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    
+        .welcome-screen,
+        .quiz-screen,
+        .result-screen {
+            display: none;
+        }
+    
+        .active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+    
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+    
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+    
+        .description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+    
+        .start-btn,
+        .next-btn,
+        .retry-btn,
+        .nav-button.exit,
+        .nav-button.home {
+            display: inline-block;
+            width: 30%;
+            max-width: 300px;
+            margin: 5px;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #3498db;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+    
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    
+        .progress {
+            height: 100%;
+            background: #3498db;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    
+        .question {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+    
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+    
+        .option {
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+    
+        .option:hover {
+            border-color: #3498db;
+            background: #f3f4f6;
+        }
+    
+        .option.correct {
+            background: #dcfce7;
+            border-color: #22c55e;
+        }
+    
+        .option.wrong {
+            background: #fee2e2;
+            border-color: #ef4444;
+        }
+    
+        .score-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+    
+        .score {
+            font-size: 48px;
+            color: #3498db;
+            margin: 10px 0;
+        }
+    
+        .feedback {
+            font-size: 20px;
+            color: #4b5563;
+            margin: 10px 0;
+        }
+    
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+    
+        @media (max-width: 640px) {
+            .container {
+                padding: 20px;
+            }
+    
+            h1 {
+                font-size: 24px;
+            }
+    
+            .question {
+                font-size: 18px;
+            }
+        }
+    
+        /* Navigation Buttons */
+        .nav-button {
+    
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            background: #4f46e5;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+        }
+    
+        .nav-button:hover {
+            box-shadow: 0 6px 8px rgba(79, 70, 229, 0.3);
+            background: #4338ca;
+        }
+    
+        .nav-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+        }
+    
+        .start-btn {
+            background: #4CAF50;
+            ;
+        }
+    
+        .start-btn:hover {
+            background: #44a147;
+            ;
+        }
+    
+        .nav-button.exit {
+    
+            background: #ef4444;
+        }
+    
+        .nav-button.exit:hover {
+            background: #dc2626;
+        }
+    
+        /* Button animations */
+        @keyframes buttonPop {
+            0% {
+                transform: scale(1);
+            }
+    
+            50% {
+                transform: scale(1.05);
+            }
+    
+            100% {
+                transform: scale(1);
+            }
+        }
+    
+        .nav-button i {
+            font-size: 14px;
+        }
+    
+        /* Additional styles for enhanced buttons */
+        .next-btn,
+        .retry-btn {
+            background: #2c3e50;
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+    
+        }
+    
+    
+        .next-btn:hover,
+        .retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(79, 70, 229, 0.3);
+            background: #3498db;
+        }
+    
+        .start-btn:active,
+        .next-btn:active,
+        .retry-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+        }
+    
+        /* Add margin-top to content to accommodate navigation buttons */
+        .welcome-screen,
+        .quiz-screen,
+        .result-screen {
+            margin-top: 40px;
+        }
+    
+        /* Confirmation modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+    
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            animation: modalPopIn 0.3s ease;
+        }
+    
+        @keyframes modalPopIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+    
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+    
+        .modal-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+    
+        .confirm-button {
+            background: #ef4444;
+            color: white;
+        }
+    
+        .cancel-button {
+            background: #e5e7eb;
+            color: #374151;
+        }
+    
+        .confirm-button:hover {
+            background: #dc2626;
+        }
+    
+        .cancel-button:hover {
+            background: #d1d5db;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+
+        <!-- Exit Confirmation Modal -->
+        <div class="modal" id="exitModal">
+            <div class="modal-content">
+                <h2 style="margin-bottom: 15px;">ยืนยันการออกจากแบบทดสอบ</h2>
+                <p>คุณแน่ใจหรือไม่ที่จะออกจากแบบทดสอบ?</p>
+                <div class="modal-buttons">
+                    <button class="modal-button cancel-button" onclick="hideExitConfirmation()">ยกเลิก</button>
+                    <button class="modal-button confirm-button" onclick="exitQuiz()">ยืนยัน</button>
+                </div>
+            </div>
+        </div>
+        <!-- Welcome Screen -->
+        <div class="welcome-screen active">
+            <h1>แบบทดสอบเรื่องคุณธรรม จริยธรรม และศีลธรรม</h1>
+            <p class="description">ทดสอบความรู้เกี่ยวกับแบบทดสอบเรื่องคุณธรรม จริยธรรม และศีลธรรม ของข้าราชการครู</p>
+            <center><button class="start-btn">เริ่มทำแบบทดสอบ</button>
+                <!-- Navigation Buttons -->
+                <button class="nav-button exit" onclick="showExitConfirmation()">
+                    <i class="fas fa-sign-out-alt"></i> ออก
+                </button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div class="quiz-screen">
+            <div class="stats">
+                <span class="question-count">คำถามที่ 1 จาก 5</span>
+                <span class="current-score">คะแนน: 0</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="question"></div>
+            <div class="options"></div>
+        </div>
+
+        <!-- Result Screen -->
+        <div class="result-screen">
+            <h1>ผลการทดสอบ</h1>
+            <div class="score-container">
+                <div class="score">0/5</div>
+                <div class="percentage">0%</div>
+                <div class="feedback"></div>
+            </div>
+            <center><button class="retry-btn">ทำแบบทดสอบอีกครั้ง</button></center>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                "question": "ครูต้องมีคุณธรรมข้อใดบ้างในการเป็นแบบอย่างที่ดีให้กับนักเรียน?",
+                "options": [
+                    "ขยันหมั่นเพียร",
+                    "ซื่อสัตย์และตรงต่อเวลา",
+                    "เอื้อเฟื้อเผื่อแผ่",
+                    "ทั้งหมดที่กล่าวมา"
+                ],
+                "correct": 3
+            },
+            {
+                "question": "ข้อใดคือคุณธรรมที่ครูต้องมีเพื่อส่งเสริมการเรียนรู้และการพัฒนาตนเอง?",
+                "options": [
+                    "รู้จักปรับปรุงตนเอง",
+                    "มีความอดทน อดกลั้น",
+                    "มีสัจจะและแสดงความจริงใจ",
+                    "มีระเบียบวินัยและตรงต่อเวลา"
+                ],
+                "correct": 0
+            },
+            {
+                "question": "ครูควรมีคุณธรรมในเรื่องใดในการปฏิบัติต่อผู้อาวุโส?",
+                "options": [
+                    "มีความเคารพและปฏิบัติต่อผู้อาวุโสในทางที่ดี",
+                    "ไม่แสดงออกถึงความเคารพ",
+                    "ควรหลีกเลี่ยงการพูดคุยกับผู้อาวุโส",
+                    "การทำงานร่วมกับผู้อาวุโสควรอยู่ในกรอบการทำงานเท่านั้น"
+                ],
+                "correct": 0
+            },
+            {
+                "question": "คุณธรรมข้อใดที่ครูควรมีเพื่อสร้างความเชื่อมั่นในตัวนักเรียนและผู้ปกครอง?",
+                "options": [
+                    "ความซื่อสัตย์",
+                    "ความรอบคอบ",
+                    "ความอดทน",
+                    "การให้อภัย"
+                ],
+                "correct": 0
+            },
+            {
+                "question": "การที่ครูทำสิ่งใดจะเป็นการแสดงความจงรักภักดีต่อชาติ ศาสนา และพระมหากษัตริย์?",
+                "options": [
+                    "การปฏิบัติตามระเบียบวินัย",
+                    "การช่วยเหลือชุมชนและสังคม",
+                    "การบำเพ็ญประโยชน์เพื่อสาธารณะ",
+                    "ทั้งหมดที่กล่าวมา"
+                ],
+                "correct": 3
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let canAnswer = true;
+
+        const welcomeScreen = document.querySelector('.welcome-screen');
+        const quizScreen = document.querySelector('.quiz-screen');
+        const resultScreen = document.querySelector('.result-screen');
+        const startBtn = document.querySelector('.start-btn');
+        const retryBtn = document.querySelector('.retry-btn');
+        const questionElement = document.querySelector('.question');
+        const optionsElement = document.querySelector('.options');
+        const progressBar = document.querySelector('.progress');
+        const questionCount = document.querySelector('.question-count');
+        const currentScoreElement = document.querySelector('.current-score');
+
+        function showScreen(screen) {
+            document.querySelectorAll('.welcome-screen, .quiz-screen, .result-screen')
+                .forEach(s => s.classList.remove('active'));
+            screen.classList.add('active');
+        }
+
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            questionElement.textContent = question.question;
+            optionsElement.innerHTML = '';
+            questionCount.textContent = `คำถามที่ ${currentQuestion + 1} จาก ${questions.length}`;
+            progressBar.style.width = `${(currentQuestion / questions.length) * 100}%`;
+
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'option';
+                button.textContent = option;
+                button.onclick = () => checkAnswer(index);
+                optionsElement.appendChild(button);
+            });
+            canAnswer = true;
+        }
+
+        function checkAnswer(selectedIndex) {
+            if (!canAnswer) return;
+            canAnswer = false;
+
+            const correct = selectedIndex === questions[currentQuestion].correct;
+            const options = document.querySelectorAll('.option');
+
+            options[selectedIndex].classList.add(correct ? 'correct' : 'wrong');
+            options[questions[currentQuestion].correct].classList.add('correct');
+
+            if (correct) score++;
+            currentScoreElement.textContent = `คะแนน: ${score}`;
+
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    displayQuestion();
+                } else {
+                    showResults();
+                }
+            }, 1500);
+        }
+
+        function showResults() {
+            showScreen(resultScreen);
+            const percentage = (score / questions.length) * 100;
+            document.querySelector('.score').textContent = `${score}/${questions.length}`;
+            document.querySelector('.percentage').textContent = `${percentage}%`;
+
+            const feedback = document.querySelector('.feedback');
+            if (percentage >= 80) {
+                feedback.textContent = '🎉 ยอดเยี่ยม!';
+            } else if (percentage >= 60) {
+                feedback.textContent = '👍 ดี แต่ยังมีที่ให้พัฒนา';
+            } else {
+                feedback.textContent = 'ควรทบทวนเนื้อหาเพิ่มเติม';
+            }
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            showScreen(welcomeScreen);
+            currentScoreElement.textContent = 'คะแนน: 0';
+        }
+
+        startBtn.onclick = () => {
+            showScreen(quizScreen);
+            displayQuestion();
+        };
+
+        function showExitConfirmation() {
+            document.getElementById('exitModal').style.display = 'flex';
+        }
+
+        function hideExitConfirmation() {
+            document.getElementById('exitModal').style.display = 'none';
+        }
+
+        function exitQuiz() {
+            // Add your exit logic here
+            window.location.href = 'topic4.html'; // หรือลิงก์ไปยังหน้าที่ต้องการ
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function (event) {
+            const modal = document.getElementById('exitModal');
+            if (event.target == modal) {
+                hideExitConfirmation();
+            }
+        }
+
+        retryBtn.onclick = resetQuiz;
+    </script>
+</body>
+
+</html>

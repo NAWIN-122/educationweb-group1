@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตัวอย่างเว็บไซต์</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #0083b0;
+            --accent-color: #00b4db;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --white: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        /* Header & Navigation */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-image {
+            height: 50px;
+            padding: 8px;
+            background: var(--primary-color);
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-list a:hover {
+            background: var(--light-gray);
+            color: var(--primary-color);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            min-width: 250px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            list-style: none;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .bar1,
+        .bar2,
+        .bar3 {
+            width: 30px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 6px 0;
+            transition: 0.4s;
+            border-radius: 2px;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: var(--white);
+            padding: 80px 1rem 1rem;
+            transition: 0.4s ease-in-out;
+            overflow-y: auto;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--light-gray);
+            transition: 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            background: var(--light-gray);
+            padding-left: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .mobile-menu .dropdown-menu {
+            position: static;
+            display: none;
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+            box-shadow: none;
+            padding-left: 1.5rem;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease-in-out;
+            z-index: 998;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hamburger Animation */
+        .hamburger.active .bar1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active .bar2 {
+            opacity: 0;
+        }
+
+        .hamburger.active .bar3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Content Styling */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-list {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            body.menu-open {
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay"></div>
+
+    <header>
+        <section class="top-bar">
+            <div class="logo">
+                <div class="logo-image">LOGO</div>
+            </div>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="index.html">หน้าแรก</a></li>
+                    <li class="dropdown">
+                        <a href="#">หัวข้อทั้งหมด</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="topic1.html">1. ความหมายของคุณธรรม</a></li>
+                            <li><a href="topic2.html">2. วินัยและการรักษาวินัย</a></li>
+                            <li><a href="topic3.html">3. โทษผิดวินัยมี 5 สถาน</a></li>
+                            <li><a href="topic4.html">4. คุณธรรม จริยธรรมของครู</a></li>
+                            <li><a href="topic5.html">5. จรรยาบรรณวิชาชีพครู</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="members.html">สมาชิก</a></li>
+                    <li><a href="contact.html">ติดต่อ</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+            </nav>
+        </section>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="index.html">หน้าแรก</a>
+        <div class="dropdown">
+            <a href="#" class="dropdown-toggle">หัวข้อทั้งหมด</a>
+            <ul class="dropdown-menu">
+                <li><a href="topic1.html">1. ความหมายของคุณธรรม</a></li>
+                <li><a href="topic2.html">2. วินัยและการรักษาวินัย</a></li>
+                <li><a href="topic3.html">3. โทษผิดวินัยมี 5 สถาน</a></li>
+                <li><a href="topic4.html">4. คุณธรรม จริยธรรมของครู</a></li>
+                <li><a href="topic5.html">5. จรรยาบรรณวิชาชีพครู</a></li>
+            </ul>
+        </div>
+        <a href="members.html">สมาชิก</a>
+        <a href="contact.html">ติดต่อ</a>
+    </div>
+
+    <!-- Content -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>วินัย คุณธรรม จริยธรรม และจรรยาบรรณวิชาชีพครู</h1>
+            <p>แหล่งความรู้สำหรับครูมืออาชีพ</p>
+        </div>
+    </section>
+
+    <header>
+        <div class="container">
+            <section class="top-bar">
+                <div class="logo">
+                    <img src="images/logo.png" alt="โลโก้" class="logo-image">
+                </div>
+                <nav>
+                    <ul class="nav-list">
+                        <li><a href="index.html">หน้าแรก</a></li>
+                        <li class="dropdown">
+                            <a href="#">หัวข้อทั้งหมด</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="topic1.html">1. ความหมายของคุณธรรม</a></li>
+                                <li><a href="topic2.html">2. วินัยและการรักษาวินัย</a></li>
+                                <li><a href="topic3.html">3. โทษผิดวินัยมี 5 สถาน</a></li>
+                                <li><a href="topic4.html">4. คุณธรรม จริยธรรมของครู</a></li>
+                                <li><a href="topic5.html">5. จรรยาบรรณวิชาชีพครู</a></li>
+                                <li><a href="topic6.html">6. แนวทางการพัฒนาคุณธรรม</a></li>
+                                <li><a href="topic7.html">7. การพัฒนาคุณธรรม</a></li>
+                                <li><a href="quiz.html">แบบทดสอบ</a></li>
+                                <li><a href="exam.html">ข้อสอบ</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="members.html">สมาชิก</a></li>
+                        <li><a href="contact.html">ติดต่อ</a></li>
+                    </ul>
+                    <div class="hamburger">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                </nav>
+            </section>
+        </div>
+    </header>
+
+    <main>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <a href="index.html">หน้าแรก</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle">หัวข้อทั้งหมด</a>
+                <ul class="dropdown-menu">
+                    <li><a href="topic1.html">1. ความหมายของคุณธรรม</a></li>
+                    <li><a href="topic2.html">2. วินัยและการรักษาวินัย</a></li>
+                    <li><a href="topic3.html">3. โทษผิดวินัยมี 5 สถาน</a></li>
+                    <li><a href="topic4.html">4. คุณธรรม จริยธรรมของครู</a></li>
+                    <li><a href="topic5.html">5. จรรยาบรรณวิชาชีพครู</a></li>
+                </ul>
+            </div>
+            <a href="members.html">สมาชิก</a>
+            <a href="contact.html">ติดต่อ</a>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2 class="fadeIn-text">วินัย คุณธรรม จริยธรรม และจรรยาบรรณวิชาชีพครู</h2>
+                <p class="fadeIn-text">มาตรฐานแห่งความเป็นครูมืออาชีพ l สาขาคอมพิวเตอร์ศึกษา ปี 3 l
+                    มหาวิทยาลัยราชภัฏนครราชสีมา</p>
+            </div>
+        </section>
+        
+        <!-- Topic Grid Section -->
+        <section id="topics" class="topic-grid">
+            <h2>หัวข้อสำคัญ</h2>
+            <div class="topic-cards">
+                <div class="topic-card">
+                    <img src="images/topic1.jpg" alt="ความหมายของคุณธรรม">
+                    <div class="topic-card-content">
+                        <h3>ความหมายของคุณธรรม</h3>
+                        <p>ความหมายและความสำคัญของคุณธรรมในวิชาชีพครู การประยุกต์ใช้ในชีวิตประจำวัน</p>
+                        <a href="topic1.html" class="btn-secondary">อ่านเพิ่มเติม</a>
+                    </div>
+                </div>
+                <div class="topic-card">
+                    <img src="images/topic2.jpg" alt="วินัยและการรักษาวินัย">
+                    <div class="topic-card-content">
+                        <h3>วินัยและการรักษาวินัย</h3>
+                        <p>บทบาทสำคัญของวินัยในความเป็นครู แนวทางการรักษาวินัย</p>
+                        <a href="topic2.html" class="btn-secondary">อ่านเพิ่มเติม</a>
+                    </div>
+                </div>
+                <div class="topic-card">
+                    <img src="images/topic5.jpg" alt="จรรยาบรรณวิชาชีพครู">
+                    <div class="topic-card-content">
+                        <h3>จรรยาบรรณวิชาชีพครู</h3>
+                        <p>แนวปฏิบัติที่แสดงถึงความเป็นมืออาชีพ การพัฒนาตนเองตามจรรยาบรรณ</p>
+                        <a href="topic5.html" class="btn-secondary">อ่านเพิ่มเติม</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="quiz-section">
+            <div class="quiz-container">
+                <h2>แบบทดสอบและข้อสอบ</h2>
+                <div class="quiz-grid">
+                    <div class="quiz-card">
+                        <h3>แบบทดสอบประจำบท</h3>
+                        <p>ทดสอบความเข้าใจเนื้อหาแต่ละบท พร้อมเฉลยและคำอธิบาย</p>
+                        <a href="quiz.html" class="btn-secondary">เริ่มทำแบบทดสอบ</a>
+                    </div>
+                    <div class="quiz-card">
+                        <h3>ข้อสอบเก่า</h3>
+                        <p>รวมข้อสอบเก่าพร้อมเฉลย เพื่อเตรียมความพร้อมในการสอบ</p>
+                        <a href="exam.html" class="btn-secondary">ดูข้อสอบเก่า</a>
+                    </div>
+                    <div class="quiz-card">
+                        <h3>แบบฝึกหัดเสริม</h3>
+                        <p>แบบฝึกหัดเพิ่มเติมเพื่อทบทวนความเข้าใจ</p>
+                        <a href="practice.html" class="btn-secondary">ทำแบบฝึกหัด</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="content-section">
+        <h2>ตัวอย่างเนื้อหา</h2>
+        <p>ลองกดปุ่มเมนูด้านขวาบนเพื่อดูการทำงานของเมนูแบบ slide</p>
+    </section>
+
+    <script>
+        const hamburger =  document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.overlay');
+        const body = document.body;
+        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                const dropdownMenu = toggle.nextElementSibling;
+                const isOpen = dropdownMenu.style.display === 'block';
+
+                // Close all other dropdowns
+                document.querySelectorAll('.mobile-menu .dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+
+                // Toggle current dropdown
+                dropdownMenu.style.display = isOpen ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+
+</html>

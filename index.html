@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วินัย คุณธรรม จริยธรรม และจรรยาบรรณวิชาชีพครู</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/images/ced.ico">
+</head>
+
+<body>
+    <div class="overlay"></div>
+
+    <header>
+        <div class="container">
+            <section class="top-bar">
+                <div class="logo">
+                    <img src="images/logo.png" alt="โลโก้" class="logo-image">
+                </div>
+                <nav>
+                    <ul class="nav-list">
+                        <li><a href="index.html">หน้าแรก</a></li>
+                        <li class="dropdown">
+                            <a href="#">หัวข้อทั้งหมด</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="topic1.html">1. ความหมายของคุณธรรม</a></li>
+                                <li><a href="topic2.html">2. วินัยและการรักษาวินัย</a></li>
+                                <li><a href="topic3.html">3. โทษผิดวินัยมี 5 สถาน</a></li>
+                                <li><a href="topic4.html">4. คุณธรรม จริยธรรมของครู</a></li>
+                                <li><a href="topic5.html">5. จรรยาบรรณวิชาชีพครู</a></li>
+                                <li><a href="topic6.html">6. แนวทางการพัฒนาคุณธรรม</a></li>
+                                <li><a href="topic7.html">7. การพัฒนาคุณธรรม</a></li>
+                                <li><a href="test01.html">ข้อสอบเรื่องคุณธรรมจริยธรรมของครู</a></li>
+                                <li><a href="test02.html">ข้อสอบเรื่องจรรยาบรรณของครู</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="members.html">สมาชิก</a></li>
+                        <li><a href="contact.html">ติดต่อ</a></li>
+                    </ul>
+                    <div class="hamburger">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                </nav>
+            </section>
+        </div>
+    </header>
+
+    <main>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <a href="index.html">หน้าแรก</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle">หัวข้อทั้งหมด</a>
+                <ul class="dropdown-menu">
+                    <li><a href="topic1.html">1. ความหมายของคุณธรรม</a></li>
+                    <li><a href="topic2.html">2. วินัยและการรักษาวินัย</a></li>
+                    <li><a href="topic3.html">3. โทษผิดวินัยมี 5 สถาน</a></li>
+                    <li><a href="topic4.html">4. คุณธรรม จริยธรรมของครู</a></li>
+                    <li><a href="topic5.html">5. จรรยาบรรณวิชาชีพครู</a></li>
+                </ul>
+            </div>
+            <a href="members.html">สมาชิก</a>
+            <a href="contact.html">ติดต่อ</a>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2 class="fadeIn-text">วินัย คุณธรรม จริยธรรม และจรรยาบรรณวิชาชีพครู</h2>
+                <p class="fadeIn-text">มาตรฐานแห่งความเป็นครูมืออาชีพ l สาขาคอมพิวเตอร์ศึกษา ปี 3 l
+                    มหาวิทยาลัยราชภัฏนครราชสีมา</p>
+            </div>
+        </section>
+
+        <!-- เพิ่มส่วนนี้หลัง Hero Section -->
+        <div class="slideshow-container">
+            <div class="slide">
+                <img src="images/1.jpg" alt="ภาพกิจกรรม 1">
+            </div>
+        
+            <div class="slide">
+                <img src="/images/2.jpg" alt="ภาพกิจกรรม 2">
+            </div>
+        
+            <div class="slide">
+                <img src="images/3.jpg" alt="ภาพกิจกรรม 3">
+            </div>
+        
+            <a class="prev1" onclick="changeSlide(-1)">&#10094;</a>
+            <a class="next1" onclick="changeSlide(1)">&#10095;</a>
+        </div>
+        
+        <div class="dots-container">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+        
+        <!-- Topic Grid Section -->
+        <section id="topics" class="topic-grid">
+            <h2>หัวข้อสำคัญ</h2>
+            <div class="topic-cards">
+                <div class="topic-card">
+                    <img src="images/topic1.jpg" alt="ความหมายของคุณธรรม">
+                    <div class="topic-card-content">
+                        <h3>ความหมายของคุณธรรม</h3>
+                        <p>ความหมายและความสำคัญของคุณธรรมในวิชาชีพครู การประยุกต์ใช้ในชีวิตประจำวัน</p>
+                        <a href="topic1.html" class="btn-secondary">อ่านเพิ่มเติม</a>
+                    </div>
+                </div>
+                <div class="topic-card">
+                    <img src="images/topic2.jpg" alt="วินัยและการรักษาวินัย">
+                    <div class="topic-card-content">
+                        <h3>วินัยและการรักษาวินัย</h3>
+                        <p>บทบาทสำคัญของวินัยในความเป็นครู แนวทางการรักษาวินัย</p>
+                        <a href="topic2.html" class="btn-secondary">อ่านเพิ่มเติม</a>
+                    </div>
+                </div>
+                <div class="topic-card">
+                    <img src="images/topic5.jpg" alt="จรรยาบรรณวิชาชีพครู">
+                    <div class="topic-card-content">
+                        <h3>จรรยาบรรณวิชาชีพครู</h3>
+                        <p>แนวปฏิบัติที่แสดงถึงความเป็นมืออาชีพ การพัฒนาตนเองตามจรรยาบรรณ</p>
+                        <a href="topic5.html" class="btn-secondary">อ่านเพิ่มเติม</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="quiz-section">
+            <div class="quiz-container">
+                <h2>แบบทดสอบและข้อสอบ</h2>
+                <div class="quiz-grid">
+                    <div class="quiz-card">
+                        <h3>ข้อสอบเรื่องคุณธรรมจริยธรรมของครู</h3>
+                        <p>เพื่อเตรียมความพร้อมในการสอบ</p>
+                        <a href="test01.html" class="btn-secondary">เริ่มทำข้อสอบ</a>
+                    </div>
+                    <div class="quiz-card">
+                        <h3>ข้อสอบเรื่องจรรยาบรรณของครู</h3>
+                        <p>เพื่อเตรียมความพร้อมในการสอบ</p>
+                        <a href="test02.html" class="btn-secondary">เริ่มทำข้อสอบ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h1>วินัย คุณธรรม จริยธรรม และจรรยาบรรณวิชาชีพครู - มหาวิทยาลัยราชภัฏนครราชสีมา</h1>
+                <p>เว็บไซต์นี้เป็นส่วนหนึ่งของการศึกษาในรายวิชาจรรยาบรรณวิชาชีพครู สาขาคอมพิวเตอร์ศึกษา ชั้นปีที่ 3</p>
+            </div>
+            <div class="footer-social">
+                <h4>ติดตามเรา</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/ced.nrru" class="social-icon facebook">
+                        <i class="fab fa-facebook-f"></i>
+                        ติดตามเราบน Facebook
+                    </a>
+                    <a href="https://line.me/ti/g/D8EPsDjJ48" class="social-icon line">
+                        <i class="fab fa-line"></i>
+                        ติดต่อเราทาง Line
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© กลุ่ม 1 สาขาคอมพิวเตอร์ศึกษา มหาวิทยาลัยราชภัฏนครราชสีมา. สงวนลิขสิทธิ์.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
